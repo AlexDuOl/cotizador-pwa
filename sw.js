@@ -10,3 +10,7 @@ self.addEventListener('activate', () => {
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
+        console.log('Service Worker fetch');
+    }))
+});
+
