@@ -1,7 +1,7 @@
 {
   "name": "Cotizador PWA",
   "short_name": "Cotizador",
-  "start_url": "/index.html",
+  "start_url": "/cotizador-pwa/",
   "display": "standalone",
   "background_color": "#f0f0f0",
   "theme_color": "#007bff",
