@@ -3,8 +3,8 @@ const urlsToCache = [
   '/',
   '/cotizador-pwa/',
   '/cotizador-pwa/index.html',
-  '/cotizador-pwa/css/style.css',
-  '/cotizador-pwa/js/app.js',
+  '/cotizador-pwa/style.css',
+  '/cotizador-pwa/app.js',
   '/cotizador-pwa/manifest.json',
 ];
 
