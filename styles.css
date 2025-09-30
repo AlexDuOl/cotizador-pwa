@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #f0f0f0;
+  background-color: #d6eadf;
 }
 header {
   text-align: center;
@@ -25,13 +25,13 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #95b8d1;
+  color: #ffffff;
   border: none;
   cursor: pointer;
 }
 button:hover {
-  background-color: #0056b3;
+  background-color: #579bcb;
 }
 .resultado {
   margin-top: 20px;

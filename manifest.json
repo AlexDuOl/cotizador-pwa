@@ -3,18 +3,18 @@
   "short_name": "Cotizador",
   "start_url": "/cotizador-pwa/",
   "display": "standalone",
-  "background_color": "#f0f0f0",
-  "theme_color": "#007bff",
+  "background_color": "#d6eadf",
+  "theme_color": "#EEA82F",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/cotizador-pwa/images/Logo1.jpg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/jpg"
     },
     {
-      "src": "icon-512.png",
+      "src": "/cotizador-pwa/images/Logo1.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpg"
     }
   ]
 }
