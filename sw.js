@@ -1,16 +1,30 @@
-self.addEventListener('install', () => {
-  console.log('Service Worker instalado');
-  self.skipWaiting();
+const CACHE_NAME = 'cache-v1';
+const urlsToCache = [
+  '/',
+  '/cotizador-pwa/',
+  '/cotizador-pwa/index.html',
+  '/cotizador-pwa/css/style.css',
+  '/cotizador-pwa/js/app.js',
+  '/cotizador-pwa/manifest.json',
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+  );
 });
 
-self.addEventListener('activate', () => {
-  console.log('Service Worker activado');
-});
-
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-        console.log('Service Worker fetch');
-    }))
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request); 
+      })
+  );
 });
-
