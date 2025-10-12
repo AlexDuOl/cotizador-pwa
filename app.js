@@ -250,7 +250,7 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
-        doc.text(`TIempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 55); 
+        doc.text(`TIempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 60); 
         
         let startY = 65;
 
@@ -260,7 +260,6 @@ function descargarPDF() {
             //["Tipo de Venta", data.tipoVenta],
             ["Dimensiones (cm)", `${data.ancho} x ${data.alto}`],
             ["Área Total (cm²)", data.ancho * data.alto],
-            ["Anticipo 50%", data.formateado / 2],
             //["Tiempo de Corte (min)", data.tiempoCorte],
             //["Costo Base Material (c/Dscto)", `$${data.costoBaseCalculado}`],
             //["Costo Máquina (Operac.)", `$${data.costoOperacional}`],
@@ -284,9 +283,9 @@ function descargarPDF() {
         doc.text(`SUBTOTAL: $${data.precioSinIva}`, 15, finalY + 10);
         doc.text(`IVA (16%): $${data.ivaAplicado}`, 15, finalY + 15);
         
-        doc.setFontSize(16);
+        doc.setFontSize(14);
         doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
-        //doc.text(`Anticipo 50%: ${data.formateado/2}`, 15, finalY + 30);
+        doc.text(`Anticipo 50%: ${(data.formateado/2)}`, 15, finalY + 35);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
