@@ -99,3 +99,30 @@ El proyecto requiere la inclusión de las siguientes librerías externas para la
 
   * `jspdf.umd.min.js`
   * `jspdf.plugin.autotable.min.js`
+
+¡Claro! La sección de PWA y Service Worker es fundamental para explicar cómo se actualiza la aplicación en el celular.
+
+Aquí tienes la sección que puedes agregar al final de tu archivo `README.md`, titulada "Actualización de la PWA en el Celular":
+
+---
+
+## 📱 Actualización de la PWA en el Celular
+
+Para los usuarios que tienen la aplicación instalada en su pantalla de inicio (como una PWA), la actualización no es automática e inmediata; se gestiona a través del **Service Worker (SW)**.
+
+El navegador solo descargará la nueva versión de los archivos (como `app.js` o `index.html`) cuando detecte un cambio en el archivo principal del SW (`sw.js`).
+
+### Proceso de Actualización
+
+1.  **Detectar el Cambio:** Cuando subes una nueva versión de tu código a GitHub, debes cambiar el número de versión en la constante `CACHE_NAME` dentro de **`sw.js`** (ej., de `v7` a `v8`). Esto le indica al navegador que hay una nueva versión.
+2.  **Descarga en Segundo Plano:** Cuando el usuario **abre la aplicación** en su celular (con conexión a internet), el navegador ejecuta el SW y detecta la nueva versión. El SW descarga e instala silenciosamente todos los nuevos archivos en caché, **pero la aplicación que está viendo el usuario sigue siendo la versión antigua**.
+3.  **Activación de la Nueva Versión:** La nueva versión solo se activará cuando el usuario **cierre completamente** la PWA y la vuelva a abrir, o cuando fuerce una recarga de la página (si está usándola como un navegador normal).
+
+### 📝 Instrucciones para el Usuario Final
+
+Si un usuario reporta que no ve los cambios, puedes indicarle que fuerce la actualización de esta manera:
+
+1.  **Cerrar la Aplicación:** Debe cerrar la PWA por completo (sacándola de las aplicaciones recientes o del carrusel de aplicaciones abiertas).
+2.  **Volver a Abrir:** Al reabrir la aplicación, el nuevo Service Worker se activará y servirá la versión actualizada del código.
+
+*(Nota: Este comportamiento es estándar en la mayoría de los navegadores para asegurar que el usuario no experimente errores mientras usa la aplicación).*
