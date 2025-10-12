@@ -181,7 +181,7 @@ function calcularTotal(e) {
     console.log(`Margen de Utilidad: $${margenUtilidad.toFixed(2)}`);
     console.log(`Precio SIN IVA (Subtotal): $${precioSinIva.toFixed(2)}`);
     console.log(`Precio FINAL (CON IVA, Redondeado): $${costoFinal.toFixed(2)}`); 
-    console.log(`Anticipo): $${(costoFinal/2)}`); 
+    console.log(`Anticipo: $${(costoFinal/2)}`); 
     console.log("--------------------------");
 
     // Almacenar datos para el PDF/WhatsApp
@@ -251,7 +251,7 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
-        doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo`, 15, 60); 
+        doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo $${(costoFinal/2)}`, 15, 60); 
         doc.text(`Tiempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 65); 
         
         let startY = 70;
