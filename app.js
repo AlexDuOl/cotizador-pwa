@@ -181,7 +181,7 @@ function calcularTotal(e) {
     console.log(`Margen de Utilidad: $${margenUtilidad.toFixed(2)}`);
     console.log(`Precio SIN IVA (Subtotal): $${precioSinIva.toFixed(2)}`);
     console.log(`Precio FINAL (CON IVA, Redondeado): $${costoFinal.toFixed(2)}`); 
-    console.log(`Precio FINAL (CON IVA, Redondeado): $${(costoFinal/2).toFixed(2)}`); 
+    console.log(`Anticipo): $${(costoFinal/2)}`); 
     console.log("--------------------------");
 
     // Almacenar datos para el PDF/WhatsApp
@@ -277,6 +277,7 @@ function descargarPDF() {
         });
         
         const finalY = doc.autoTable.previous.finalY;
+        const anticipo = data.formateado/2
 
         // 4. Mostrar Total
         doc.setFontSize(14);
@@ -286,7 +287,7 @@ function descargarPDF() {
         
         doc.setFontSize(14);
         doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
-        doc.text(`Anticipo 50%: ${(data.formateado/2)}`, 15, finalY + 35);
+        doc.text(`Anticipo 50%: ${anticipo}`, 15, finalY + 35);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
