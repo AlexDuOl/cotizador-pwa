@@ -249,20 +249,21 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
+        doc.text(`TIempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 55); 
         
         let startY = 65;
 
         // 3. Detalles de la Cotización (Solo modo Corte Láser/Servicios)
         const tableData = [
             ["Material Cotizado", data.material],
-            ["Tipo de Venta", data.tipoVenta],
+            //["Tipo de Venta", data.tipoVenta],
             ["Dimensiones (cm)", `${data.ancho} x ${data.alto}`],
             ["Área Total (cm²)", data.ancho * data.alto],
-            ["Tiempo de Corte (min)", data.tiempoCorte],
-            ["Costo Base Material (c/Dscto)", `$${data.costoBaseCalculado}`],
-            ["Costo Máquina (Operac.)", `$${data.costoOperacional}`],
-            ["Costo TOTAL por Pieza", `$${data.costoPorPieza}`],
-            ["Margen de Utilidad (Ganancia)", `$${data.margenUtilidad}`],
+            //["Tiempo de Corte (min)", data.tiempoCorte],
+            //["Costo Base Material (c/Dscto)", `$${data.costoBaseCalculado}`],
+            //["Costo Máquina (Operac.)", `$${data.costoOperacional}`],
+            //["Costo TOTAL por Pieza", `$${data.costoPorPieza}`],
+            //["Margen de Utilidad (Ganancia)", `$${data.margenUtilidad}`],
         ];
 
         doc.autoTable({
@@ -278,11 +279,12 @@ function descargarPDF() {
         // 4. Mostrar Total
         doc.setFontSize(14);
         doc.setTextColor(0, 0, 0); 
-        doc.text(`SUBTOTAL (sin IVA): $${data.precioSinIva}`, 15, finalY + 10);
+        doc.text(`SUBTOTAL: $${data.precioSinIva}`, 15, finalY + 10);
         doc.text(`IVA (16%): $${data.ivaAplicado}`, 15, finalY + 15);
         
         doc.setFontSize(16);
-        doc.text(`TOTAL FINAL: ${data.formateado}`, 15, finalY + 25);
+        doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
+        doc.text(`Anticipo 50%: ${data.formateado/2}`, 15, finalY + 25);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
