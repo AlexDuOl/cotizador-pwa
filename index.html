@@ -1,38 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cotizador El Gato en La Luna</title>
-<link rel="manifest" href="manifest.json" />
-<link rel="stylesheet" href="styles.css" />
-<link rel="icon" href="/images/logo1.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador El Gato en La Luna</title>
+    
+    <link rel="manifest" href="/cotizador-pwa/manifest.json">
+    <!--<link rel="manifest" href="/manifest.json">-->
+    
+     <link rel="stylesheet" href="/cotizador-pwa/style.css">
+    <!--<link rel="stylesheet" href="/styles.css">-->
+
+    <link rel="shortcut icon" href="/cotizador-pwa/images/logo1.ico"> 
+    <!--<link rel="shortcut icon" href="/images/logo1.ico">-->
 </head>
 <body>
-<header>
-  <h1>Cotizador Simple</h1>
-</header>
-<main>
-  <div class="input-group">
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" min="0" placeholder="Ingresa la cantidad" />
-  </div>
-  <div class="input-group">
-    <label for="precio">Precio por unidad:</label>
-    <input type="number" id="precio" min="0" placeholder="Ingresa el precio" />
-  </div>
-  <button id="calcular">Calcular</button>
-  <div class="resultado">
-    <h2>Total: <span id="total">0</span></h2>
-  </div>
-</main>
-<script src="app.js"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js');
-    });
-  }
-</script>
+  <header>
+    <h1>El Gato en La Luna</h1>
+  </header>
+  <main>
+    <div class="container">
+      <h2>Cotizador</h2>
+      <form id="calculadora-form">
+
+          <label for="material">Tipo de Material:</label>
+          <select id="material" required>
+              <option value="" disabled selected>Selecciona un material</option>
+              <option value="MDF3mm">MDF 3mm</option>
+              <option value="MDF6mm">MDF 6mm</option>
+              <option value="AcrilicoCristal">Acrílico Cristal</option>
+              <option value="AcrilicoNegro">Acrílico Negro</option>
+              <option value="AcrilicoBlanco">Acrílico Blanco</option>
+              <option value="AcrilicoDorado">Acrílico Dorado</option>
+              <option value="AcrilicoPlata">Acrílico Plata</option>
+              <option value="AcrilicoRosaGold">Acrílico Rosa Gold</option>
+              <option value="Papel">Papel</option>
+              <option value="Grabado">Grabado</option>
+          </select>
+          
+          <label for="tipo-venta">Tipo de Venta:</label>
+          <select id="tipo-venta" required>
+              <option value="" disabled selected>Selecciona el tipo de venta</option>
+              <option value="publico">Venta al público</option>
+              <option value="medio-mayoreo">Medio mayoreo</option>
+              <option value="mayoreo">Mayoreo</option>
+          </select>
+          
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" id="cantidad" value="1" required>
+          
+          <label for="ancho">Ancho (cm):</label>
+          <input type="number" id="ancho" min="1" step="1" required>
+          
+          <label for="alto">Alto (cm):</label>
+          <input type="number" id="alto" min="1" step="1" required>
+
+          <label for="tiempo-corte">Tiempo de Corte (min):</label>
+          <input type="number" id="tiempo-corte" min="1" step="1" value="3" required>
+
+          <button type="submit" id="btn-calcular">Calcular y Generar Cotización</button>
+      </form>
+      <div id="resultado-area" style="margin-top: 20px;">
+      <h2 id="resultado-total" style="display:none;"></h2>
+      
+      <button id="btn-descargar-pdf" style="display:none; margin-bottom: 10px;" onclick="descargarPDF()">
+          Descargar Cotización (PDF) 📥
+      </button>
+
+      <button id="btn-whatsapp" style="display:none;" onclick="compartirPorWhatsApp()">
+          Compartir por WhatsApp
+      </button>
+</div>
+      
+      
+    </div>
+  </main>
+  <script src="/cotizador-pwa/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <!--<script src="/app.js"></script> -->
+  
+  <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          // Asegúrate de usar el scope correcto si no está en la raíz del repo
+          navigator.serviceWorker.register('/cotizador-pwa/sw.js')
+          //navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registrado en:', registration.scope);
+            });
+        });
+      }
+  </script>
 </body>
 </html>
