@@ -160,6 +160,11 @@ function calcularTotal(e) {
     
     // Aplicar redondeo al entero superior (Math.ceil)
     const costoFinal = Math.ceil(costoFinalSinRedondear);
+
+    // =========================================================
+    // NUEVO CÁLCULO: ANTICIPO (50% del costoFinal redondeado)
+    // =========================================================
+    const anticipo = costoFinal * 0.50;
     
     // 4. Mostrar Resultado y activar botones
     const totalFinalFormateado = costoFinal.toLocaleString('es-MX', {
@@ -181,7 +186,7 @@ function calcularTotal(e) {
     console.log(`Margen de Utilidad: $${margenUtilidad.toFixed(2)}`);
     console.log(`Precio SIN IVA (Subtotal): $${precioSinIva.toFixed(2)}`);
     console.log(`Precio FINAL (CON IVA, Redondeado): $${costoFinal.toFixed(2)}`); 
-    console.log(`Anticipo: $${(costoFinal/2)}`); 
+     console.log(`Anticipo (50% del Total): $${anticipo.toFixed(2)}`);
     console.log("--------------------------");
 
     // Almacenar datos para el PDF/WhatsApp
@@ -201,7 +206,16 @@ function calcularTotal(e) {
         margenUtilidad: margenUtilidad.toFixed(2),
         precioSinIva: precioSinIva.toFixed(2),
         // IVA ajustado para reflejar la diferencia por redondeo
-        ivaAplicado: (costoFinal - precioSinIva).toFixed(2), 
+        ivaAplicado: (costoFinal - precioSinIva).toFixed(2),
+
+        // NUEVO: Guardar el anticipo formateado
+        anticipo: anticipo,
+        anticipoFormateado: anticipo.toLocaleString('es-MX', {
+            style: 'currency',
+            currency: 'MXN',
+            minimumFractionDigits: 0, 
+            maximumFractionDigits: 0
+        }),
     };
 }
 
@@ -251,7 +265,7 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
-        doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo $${(costoFinal/2)}`, 15, 60); 
+        doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo`, 15, 60); 
         doc.text(`Tiempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 65); 
         
         let startY = 70;
@@ -284,9 +298,15 @@ function descargarPDF() {
         doc.setTextColor(0, 0, 0); 
         doc.text(`SUBTOTAL: $${data.precioSinIva}`, 15, finalY + 10);
         doc.text(`IVA (16%): $${data.ivaAplicado}`, 15, finalY + 15);
+
+         // NUEVO: Mostrar el Anticipo
+        doc.setFontSize(14);
+        doc.setTextColor(200, 0, 0); // Opcional: usar un color diferente para destacarlo
+        doc.text(`ANTICIPO REQUERIDO (50%): ${data.anticipoFormateado}`, 15, finalY + 20); 
         
         doc.setFontSize(14);
-        doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
+        doc.setTextColor(0, 0, 0); 
+        doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 30);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
@@ -306,7 +326,9 @@ function compartirPorWhatsApp() {
     mensaje += `*Producto:* ${data.material}\n`;
     mensaje += `*Dimensiones:* ${data.ancho}cm x ${data.alto}cm\n`;
     //mensaje += `*Tiempo Estimado de Corte:* ${data.tiempoCorte} min\n`;
-    
+
+     // NUEVO: Añadir la línea del anticipo
+    mensaje += `\n*ANTICIPO REQUERIDO (50%):* ${data.anticipoFormateado}\n`;
     mensaje += `\n*TOTAL:* ${data.formateado}\n\n`;
     mensaje += `*Importante:* Esta cotización tiene una validez de *1 SEMANA*.\n\n`;
     mensaje += `Recuerda realizar tu pedido con anticipación, no realizamos pedidos urgentes.`;
