@@ -238,7 +238,7 @@ function descargarPDF() {
     imgToBase64(logoUrl, function(logoBase64) {
         
         // 1. Logo (20mm x 20mm)
-        doc.addImage(logoBase64, 'JPEG', 15, 10, 20, 20); 
+        doc.addImage(logoBase64, 'JPG', 15, 10, 20, 20); 
         
         // 2. Título y Datos Generales
         doc.setFontSize(18);
@@ -300,11 +300,11 @@ function compartirPorWhatsApp() {
     
     mensaje += `*Producto:* ${data.material}\n`;
     mensaje += `*Dimensiones:* ${data.ancho}cm x ${data.alto}cm\n`;
-    mensaje += `*Tiempo Estimado de Corte:* ${data.tiempoCorte} min\n`;
+    //mensaje += `*Tiempo Estimado de Corte:* ${data.tiempoCorte} min\n`;
     
-    mensaje += `\n*TOTAL ESTIMADO (c/IVA):* ${data.formateado}\n\n`;
+    mensaje += `\n*TOTAL:* ${data.formateado}\n\n`;
     mensaje += `*Importante:* Esta cotización tiene una validez de *1 SEMANA*.\n\n`;
-    mensaje += `Descarga el PDF para más detalles y contáctanos para confirmar tu pedido.`;
+    mensaje += `Recuerda realizar tu pedido con anticipación, no realizamos pedidos urgentes.`;
 
     const urlEncoded = encodeURIComponent(mensaje);
     
