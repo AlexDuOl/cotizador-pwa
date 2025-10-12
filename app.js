@@ -262,7 +262,7 @@ function descargarPDF() {
         doc.text("COTIZACIÓN DE PROYECTO", 105, 25, null, null, "center");
         
         doc.setFontSize(10);
-        doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
+        //doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
         doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo`, 15, 60); 
