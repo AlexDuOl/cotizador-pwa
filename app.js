@@ -296,17 +296,18 @@ function descargarPDF() {
         // 4. Mostrar Total
         doc.setFontSize(14);
         doc.setTextColor(0, 0, 0); 
-        doc.text(`SUBTOTAL: $${data.precioSinIva}`, 15, finalY + 10);
-        doc.text(`IVA (16%): $${data.ivaAplicado}`, 15, finalY + 15);
-
-         // NUEVO: Mostrar el Anticipo
-        doc.setFontSize(14);
-        doc.setTextColor(200, 0, 0); // Opcional: usar un color diferente para destacarlo
-        doc.text(`ANTICIPO REQUERIDO (50%): ${data.anticipoFormateado}`, 15, finalY + 20); 
+        doc.text(`SUBTOTAL: $${data.precioSinIva}`, 15, finalY + 12);
+        doc.text(`IVA (16%): $${data.ivaAplicado}`, 15, finalY + 17);
         
         doc.setFontSize(14);
         doc.setTextColor(0, 0, 0); 
-        doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 30);
+        doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 27);
+
+
+        // NUEVO: Mostrar el Anticipo
+        doc.setFontSize(14);
+        doc.setTextColor(200, 0, 0); // Opcional: usar un color diferente para destacarlo
+        doc.text(`ANTICIPO REQUERIDO (50%): ${data.anticipoFormateado}`, 15, finalY + 37); 
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
@@ -327,9 +328,8 @@ function compartirPorWhatsApp() {
     mensaje += `*Dimensiones:* ${data.ancho}cm x ${data.alto}cm\n`;
     //mensaje += `*Tiempo Estimado de Corte:* ${data.tiempoCorte} min\n`;
 
-     // NUEVO: Añadir la línea del anticipo
-    mensaje += `\n*ANTICIPO REQUERIDO (50%):* ${data.anticipoFormateado}\n`;
     mensaje += `\n*TOTAL:* ${data.formateado}\n\n`;
+    mensaje += `\n*ANTICIPO REQUERIDO (50%):* ${data.anticipoFormateado}\n`;
     mensaje += `*Importante:* Esta cotización tiene una validez de *1 SEMANA*.\n\n`;
     mensaje += `Recuerda realizar tu pedido con anticipación, no realizamos pedidos urgentes.`;
 
