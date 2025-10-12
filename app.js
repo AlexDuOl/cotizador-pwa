@@ -231,6 +231,7 @@ function descargarPDF() {
     }
     
     const data = window.cotizacionData;
+    const anticipo = data.formateado/2
     
     const { jsPDF } = window.jspdf; 
     const doc = new jsPDF();
@@ -251,7 +252,8 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
-        doc.text(`TIempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 60); 
+        doc.text(`Anticipo ${anticipo}`, 15, 60); 
+        doc.text(`Tiempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 65); 
         
         let startY = 65;
 
@@ -277,7 +279,6 @@ function descargarPDF() {
         });
         
         const finalY = doc.autoTable.previous.finalY;
-        const anticipo = data.formateado/2
 
         // 4. Mostrar Total
         doc.setFontSize(14);
