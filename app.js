@@ -3,7 +3,8 @@
 // ====================================================================
 
 // **IMPORTANTE: AJUSTAR SEGÚN EL ENTORNO**
-const REPO_PATH = ''; 
+//const REPO_PATH = ''; 
+const REPO_PATH = '/cotizador-pwa'; 
 
 // Constantes de tiempo de trabajo y fiscales
 const DIAS_TRABAJADOS_ANUAL = 300;
