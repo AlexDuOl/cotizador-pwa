@@ -230,7 +230,6 @@ function descargarPDF() {
     }
     
     const data = window.cotizacionData;
-    console.log(data);
     
     const { jsPDF } = window.jspdf; 
     const doc = new jsPDF();
@@ -261,6 +260,7 @@ function descargarPDF() {
             //["Tipo de Venta", data.tipoVenta],
             ["Dimensiones (cm)", `${data.ancho} x ${data.alto}`],
             ["Área Total (cm²)", data.ancho * data.alto],
+            ["Anticipo 50%", data.formateado / 2],
             //["Tiempo de Corte (min)", data.tiempoCorte],
             //["Costo Base Material (c/Dscto)", `$${data.costoBaseCalculado}`],
             //["Costo Máquina (Operac.)", `$${data.costoOperacional}`],
@@ -286,7 +286,7 @@ function descargarPDF() {
         
         doc.setFontSize(16);
         doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
-        doc.text(`Anticipo 50%: ${data.formateado/2}`, 15, finalY + 30);
+        //doc.text(`Anticipo 50%: ${data.formateado/2}`, 15, finalY + 30);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
