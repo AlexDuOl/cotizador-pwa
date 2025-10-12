@@ -181,6 +181,7 @@ function calcularTotal(e) {
     console.log(`Margen de Utilidad: $${margenUtilidad.toFixed(2)}`);
     console.log(`Precio SIN IVA (Subtotal): $${precioSinIva.toFixed(2)}`);
     console.log(`Precio FINAL (CON IVA, Redondeado): $${costoFinal.toFixed(2)}`); 
+    console.log(`Precio FINAL (CON IVA, Redondeado): $${(costoFinal/2).toFixed(2)}`); 
     console.log("--------------------------");
 
     // Almacenar datos para el PDF/WhatsApp
