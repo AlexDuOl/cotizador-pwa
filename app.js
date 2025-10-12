@@ -231,7 +231,6 @@ function descargarPDF() {
     }
     
     const data = window.cotizacionData;
-    const anticipo = data.formateado/2
     
     const { jsPDF } = window.jspdf; 
     const doc = new jsPDF();
@@ -252,10 +251,10 @@ function descargarPDF() {
         doc.text(`Empresa: ${nombreEmpresa}`, 15, 45);
         doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, 15, 50);
         doc.text(`Validez de la Cotización: 1 SEMANA`, 15, 55); 
-        doc.text(`Anticipo ${anticipo}`, 15, 60); 
+        doc.text(`Para realizar cualquier pedido se requiere el pago del 50% de anticipo`, 15, 60); 
         doc.text(`Tiempo de entrega: 5 días hábiles a partir del pago del anticipo`, 15, 65); 
         
-        let startY = 65;
+        let startY = 70;
 
         // 3. Detalles de la Cotización (Solo modo Corte Láser/Servicios)
         const tableData = [
@@ -288,7 +287,6 @@ function descargarPDF() {
         
         doc.setFontSize(14);
         doc.text(`TOTAL: ${data.formateado}`, 15, finalY + 25);
-        doc.text(`Anticipo 50%: ${anticipo}`, 15, finalY + 35);
 
         // 5. Descargar el PDF
         doc.save(`Cotizacion_${nombreEmpresa.replace(/\s/g, "")}_${new Date().getTime()}.pdf`);
