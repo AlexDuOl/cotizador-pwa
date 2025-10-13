@@ -1,18 +1,19 @@
 {
   "name": "Cotizador PWA",
   "short_name": "Cotizador",
-  "start_url": "/",
+  "start_url": "/cotizador-pwa/",
+  
   "display": "standalone",
   "background_color": "#C0C0C0",
   "theme_color": "#EEA82F",
   "icons": [
     {
-      "src": "/images/Logo1.jpg",
+      "src": "/cotizador-pwa/images/Logo1.jpg",
       "sizes": "192x192",
       "type": "image/jpg"
     },
     {
-      "src": "/images/Logo1.jpg",
+      "src": "/cotizador-pwa/images/Logo1.jpg",
       "sizes": "512x512",
       "type": "image/jpg"
     }
